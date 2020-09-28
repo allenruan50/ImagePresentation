@@ -1,0 +1,53 @@
+<html>
+<header style="text-align: center; font-size:xx-large;">Image Super Resolution - Map Imagery Examples.</header>
+<body>
+
+    <ng-multiselect-dropdown
+  [placeholder]="'No column selected'"
+  [settings]="dropdownSettings"
+  [data]="dropdownList"
+  [(ngModel)]="selectedItems"
+  (onSelect)="onItemSelect($event)"
+  (onDeSelect)="onItemDeSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+  (onDeSelectAll)="onDeSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+
+<table style="width: 100vw;" >
+    <tbody>
+        <tr>
+            <th class="th">
+                Image File Name
+            </th>
+            <th class="th" *ngIf = "itemArray[1]">
+                LR_x2 folder image
+            </th>
+            <th class="th" *ngIf = "itemArray[2]">
+                LR_x2_Bicubic folder imag
+            </th>
+            <th class="th" *ngIf = "itemArray[3]">
+                HR folder image
+            </th>
+        </tr>
+        <tr *ngFor = "let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <td class = "fileName">
+                {{item.fileName}}
+            </td>
+            <td class="LR_x2" *ngIf = "itemArray[1]">
+                <img src="../../assets/image/LR_x2/{{item.fileName}}">
+            </td>
+            <td class="Bicubic" *ngIf = "itemArray[2]">
+                <img src="../../assets/image/LR_x2_Bicubic/{{item.fileName}}">
+            </td>
+            <td class="HR" *ngIf = "itemArray[3]">
+                <img src="../../assets/image/HR/{{item.fileName}}">
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="card-footer pd-0 pt-3">
+    <ngb-pagination [collectionSize]="items.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+</div>
+</body>
+</html>
